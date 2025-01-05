@@ -1,5 +1,5 @@
 # mockito-graphql-matchers
-Mockito argument matchers for GraphQL.
+Mockito argument-matchers for GraphQL.
 
 Features: 
 
@@ -67,6 +67,8 @@ then start matching
 when(http.exchange(queryName("getUser"))).thenReturn("{ ... }");
 when(http.exchange(queryName("getProfile"))).thenReturn("{ ... }");
 ```
+
+so to help mock more complex behaviors.
 
 ## License
 [Apache 2.0]
