@@ -8,9 +8,6 @@ Features:
 
 The library is primarily intended for mocking proxied GraphQL service implementations.
 
-## License
-[Apache 2.0]
-
 ## Obtain
 The project is built with [Maven] and is available on the central Maven repository. 
 
@@ -67,7 +64,8 @@ when(http.exchange(queryName("getUser"))).thenReturn("{ ... }");
 when(http.exchange(queryName("getProfile"))).thenReturn("{ ... }");
 ```
 
-
+## License
+[Apache 2.0]
 
 [Apache 2.0]:          	http://www.apache.org/licenses/LICENSE-2.0.html
 [issue-tracker]:       	https://github.com/skjolber/mockito-graphql-matchers/issues
