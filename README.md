@@ -1,12 +1,16 @@
 # mockito-graphql-matchers
-Simple utility for matching GraphQL payloads in Mockito mocks. 
+Mockito argument matchers for GraphQL.
 
 Features: 
 
  * query
+   * name
+   * arguments
  * mutation
+   * name
+   * arguments
 
-The library is primarily intended for mocking proxied GraphQL service implementations.
+The library is primarily intended for mocking proxied GraphQL service implementations, i.e. without needing the whole payload.
 
 ## Obtain
 The project is built with [Maven] and is available on the central Maven repository. 
