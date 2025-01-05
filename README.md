@@ -71,6 +71,10 @@ when(http.exchange(queryName("getProfile"))).thenReturn("{ ... }");
 ## License
 [Apache 2.0]
 
+# History
+
+  * 1.0.0: Initial release.
+
 [Apache 2.0]:          	http://www.apache.org/licenses/LICENSE-2.0.html
 [issue-tracker]:       	https://github.com/skjolber/mockito-graphql-matchers/issues
 [Maven]:                http://maven.apache.org/
