@@ -54,7 +54,7 @@ api ("com.github.skjolber.mockito.graphql:matchers:${mockitoGraphqlMatchersVersi
 ```
 </details>
 
-# Usage
+## Usage
 Add import
 
 ```
@@ -73,7 +73,7 @@ so to emulate more complex mock GraphQL service behaviors.
 ## License
 [Apache 2.0]
 
-# History
+## History
 
   * 1.0.0: Initial release.
 
