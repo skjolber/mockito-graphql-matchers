@@ -64,8 +64,8 @@ import com.github.skjolber.mockito.graphql.matchers.ArgumentMatchers.*;
 then start mocking
 
 ```
-when(http.exchange(queryName("getUser"))).thenReturn("{ ... }");
-when(http.exchange(queryName("getProfile"))).thenReturn("{ ... }");
+when(http.exchange(queryName("getUser"))).thenReturn("{ ... response #1 }");
+when(http.exchange(queryName("getProfile"))).thenReturn("{ ... response #2 }");
 ```
 
 so to emulate more complex mock GraphQL service behaviors.
