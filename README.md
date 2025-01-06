@@ -61,7 +61,7 @@ Add import
 import com.github.skjolber.mockito.graphql.matchers.ArgumentMatchers.*;
 ```
 
-then start matching
+then start mocking
 
 ```
 when(http.exchange(queryName("getUser"))).thenReturn("{ ... }");
