@@ -68,7 +68,7 @@ when(http.exchange(queryName("getUser"))).thenReturn("{ ... }");
 when(http.exchange(queryName("getProfile"))).thenReturn("{ ... }");
 ```
 
-so to help mock more complex behaviors.
+so to emulate more complex mock GraphQL service behaviors.
 
 ## License
 [Apache 2.0]
