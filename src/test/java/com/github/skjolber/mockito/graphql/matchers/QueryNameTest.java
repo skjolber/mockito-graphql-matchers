@@ -1,7 +1,10 @@
 package com.github.skjolber.mockito.graphql.matchers;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -58,5 +61,39 @@ public class QueryNameTest {
 
 		assertTrue(matcher.matches(GraphQLWrapper.wrapQuery("{ shop(test:123) { name } }")));
 	}
+	
+	@Test
+	public void testQuotedQuery() throws IOException {
+		Map<String, Object> map = new HashMap<>();
+		map.put("first", 1);
+		map.put("query", "name:#1234");
+		
+		QueryName matcher = new QueryName("orders", map);
+
+		assertTrue(matcher.matches(GraphQLWrapper.wrapQuery("{ orders(first:1, query:\"name:#1234\") { name } }")));
+	}
+	
+	@Test
+	public void testMockito() throws IOException {
+		GraphQLExchange exchange = mock(GraphQLExchange.class);
+		
+		when(exchange.exchange(ArgumentMatchers.queryName("shop"))).thenReturn("A");
+		when(exchange.exchange(ArgumentMatchers.queryName("location"))).thenReturn("B");
+
+		assertEquals("A", exchange.exchange(GraphQLWrapper.wrapQuery("{ shop(test:123) { name } }")));
+		assertEquals("B", exchange.exchange(GraphQLWrapper.wrapQuery("{ location(test:123) { name } }")));
+	}
+	
+	@Test
+	public void testMockitoWithArguments() throws IOException {
+		GraphQLExchange exchange = mock(GraphQLExchange.class);
+		
+		when(exchange.exchange(ArgumentMatchers.queryName("location", "id", 1))).thenReturn("A");
+		when(exchange.exchange(ArgumentMatchers.queryName("location", "id", 2))).thenReturn("B");
+
+		assertEquals("A", exchange.exchange(GraphQLWrapper.wrapQuery("{ location(id:1) { name } }")));
+		assertEquals("B", exchange.exchange(GraphQLWrapper.wrapQuery("{ location(id:2) { name } }")));
+	}
+
 
 }

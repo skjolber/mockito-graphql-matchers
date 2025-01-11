@@ -58,7 +58,7 @@ api ("com.github.skjolber.mockito.graphql:matchers:${mockitoGraphqlMatchersVersi
 Add import
 
 ```
-import com.github.skjolber.mockito.graphql.matchers.ArgumentMatchers.*;
+import static com.github.skjolber.mockito.graphql.matchers.ArgumentMatchers.*;
 ```
 
 then start mocking
