@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.skjolber.mockito.graphql</groupId>
 	<artifactId>matchers</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.4-SNAPSHOT</version>
 	<name>mockito-graphql-matchers</name>
 	<description>GraphQL matchers for use with Mockito</description>
 	<url>https://github.com/skjolber/mockito-graphql-matchers</url>
@@ -133,6 +133,11 @@
 					<artifactId>maven-deploy-plugin</artifactId>
 					<version>3.1.4</version>
 				</plugin>
+				<plugin>
+					<groupId>org.jreleaser</groupId>
+					<artifactId>jreleaser-maven-plugin</artifactId>
+					<version>1.18.0</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -197,13 +202,53 @@
                         </execution>
                     </executions>
                 </plugin>
+
+			<plugin>
+				<groupId>org.jreleaser</groupId>
+				<artifactId>jreleaser-maven-plugin</artifactId>
+				<configuration>
+					<jreleaser>
+						<signing>
+							<active>ALWAYS</active>
+							<armored>true</armored>
+						</signing>
+						<deploy>
+							<maven>
+                                <mavenCentral>
+									<!-- https://jreleaser.org/guide/latest/reference/deploy/maven/maven-central.html -->
+                                    <sonatype>
+                                        <active>RELEASE</active>
+                                        <url>https://central.sonatype.com/api/v1/publisher</url>
+                                        <stagingRepositories>target/staging-deploy</stagingRepositories>
+										<applyMavenCentralRules>true</applyMavenCentralRules>
+                                    </sonatype>
+                                </mavenCentral>
+								<nexus2>
+									<snapshot-deploy>
+										<active>SNAPSHOT</active>
+										<url>https://central.sonatype.com/repository/maven-snapshots</url>
+										<snapshotUrl>https://central.sonatype.com/repository/maven-snapshots</snapshotUrl>
+										<applyMavenCentralRules>true</applyMavenCentralRules>
+										<snapshotSupported>true</snapshotSupported>
+										<closeRepository>true</closeRepository>
+										<releaseRepository>true</releaseRepository>
+										<stagingRepositories>target/staging-deploy</stagingRepositories>
+									</snapshot-deploy>
+								</nexus2>
+							</maven>
+						</deploy>
+					</jreleaser>
+				</configuration>
+			</plugin>
+
+
             </plugins>
         </build>
 
         <profiles>
             <profile>
                 <!-- mvn -Ppublication -->
-			<id>publication</id>
+			<id>release</id>
 			<properties>
 				<altDeploymentRepository>local::file:./target/staging-deploy</altDeploymentRepository>
 			</properties>
