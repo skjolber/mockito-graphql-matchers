@@ -2,13 +2,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.skjolber.mockito.graphql</groupId>
 	<artifactId>matchers</artifactId>
-	<version>1.0.4</version>
+	<version>1.0.5-SNAPSHOT</version>
 	<name>mockito-graphql-matchers</name>
 	<description>GraphQL matchers for use with Mockito</description>
 	<url>https://github.com/skjolber/mockito-graphql-matchers</url>
 
 	<organization>
-		<name>Media Skjolberg</name>
+		<name>Thomas Skjolberg</name>
 		<url>https://skjolber.github.io</url>
 	</organization>
 
@@ -46,9 +46,9 @@
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 
-		<mockito.version>5.17.0</mockito.version>
-		<jackson.version>2.19.0</jackson.version>
-		<junit.version>5.12.2</junit.version>
+		<mockito.version>5.18.0</mockito.version>
+		<jackson.version>2.19.1</jackson.version>
+		<junit.version>5.13.1</junit.version>
 		<maven.jacoco.plugin.version>0.8.13</maven.jacoco.plugin.version>
 		
 	</properties>
@@ -63,8 +63,8 @@
 			    <scope>import</scope>
 			</dependency>
 			<dependency>
-			    <groupId>org.junit.jupiter</groupId>
-			    <artifactId>junit-jupiter</artifactId>
+			    <groupId>org.junit</groupId>
+			    <artifactId>junit-bom</artifactId>
 			    <version>${junit.version}</version>
 			    <type>pom</type>
 			    <scope>import</scope>
@@ -76,7 +76,6 @@
 			    <type>pom</type>
 			    <scope>import</scope>
 			</dependency>
-			
 		</dependencies>
 	</dependencyManagement>
 
