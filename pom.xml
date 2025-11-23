@@ -56,22 +56,22 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-			    <groupId>org.mockito</groupId>
-			    <artifactId>mockito-bom</artifactId>
-			    <version>${mockito.version}</version>
-			    <type>pom</type>
-			    <scope>import</scope>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-bom</artifactId>
+				<version>${mockito.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
 			<dependency>
-			    <groupId>org.junit</groupId>
-			    <artifactId>junit-bom</artifactId>
-			    <version>${junit.version}</version>
-			    <type>pom</type>
-			    <scope>import</scope>
+				<groupId>org.junit</groupId>
+				<artifactId>junit-bom</artifactId>
+				<version>${junit.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
 			<dependency>
-			    <groupId>tools.jackson.core</groupId>
-			    <artifactId>jackson-core</artifactId>
+				<groupId>tools.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
 				<version>${jackson.version}</version>
 			</dependency>
 		</dependencies>
@@ -79,27 +79,27 @@
 
 	<dependencies>
 		<dependency>
-		    <groupId>com.graphql-java</groupId>
-		    <artifactId>graphql-java</artifactId>
-		    <version>25.0</version>
+			<groupId>com.graphql-java</groupId>
+			<artifactId>graphql-java</artifactId>
+			<version>25.0</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.mockito</groupId> 
-		    <artifactId>mockito-core</artifactId>
+			<groupId>org.mockito</groupId> 
+			<artifactId>mockito-core</artifactId>
 		</dependency>		
 		<dependency>
-		    <groupId>tools.jackson.core</groupId>
-		    <artifactId>jackson-core</artifactId>
-    	</dependency>
-		<dependency>
-		    <groupId>org.junit.jupiter</groupId>
-		    <artifactId>junit-jupiter</artifactId>
-		    <scope>test</scope>
+			<groupId>tools.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
 		</dependency>
 		<dependency>
-		    <groupId>org.junit.jupiter</groupId>
-		    <artifactId>junit-jupiter-api</artifactId>
-		    <scope>test</scope>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<scope>test</scope>
 		</dependency>		
 	</dependencies>
 
@@ -218,6 +218,38 @@
 							<module>
 								<moduleInfoFile>src/main/java9/module-info.java</moduleInfoFile>
 							</module>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>3.6.2</version>
+				<executions>
+					<execution>
+						<id>enforce-versions</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<bannedPlugins>
+									<!-- will only display a warning but does not fail the build. -->
+									<level>WARN</level>
+									<excludes>
+										<exclude>org.apache.maven.plugins:maven-verifier-plugin</exclude>
+									</excludes>
+									<message>Please consider using the maven-invoker-plugin
+										(http://maven.apache.org/plugins/maven-invoker-plugin/)!</message>
+								</bannedPlugins>
+								<requireMavenVersion>
+									<version>3.6.3</version>
+								</requireMavenVersion>
+								<requireJavaVersion>
+									<version>17</version>
+								</requireJavaVersion>
+							</rules>
 						</configuration>
 					</execution>
 				</executions>
