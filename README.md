@@ -1,3 +1,5 @@
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.skjolber.mockito.graphql/matchers.svg)](https://mvnrepository.com/artifact/com.github.skjolber.mockito.graphql/matchers)
+
 # mockito-graphql-matchers
 Mockito argument-matchers for GraphQL.
 
@@ -75,6 +77,8 @@ so to emulate more complex mock GraphQL service behaviors.
 
 ## History
 
+  * 1.0.5: Upgrade graphql-java to 25.x and JUnit to 6.x. 
+  * 1.0.1-1.0.4: Adjust publishing.
   * 1.0.0: Initial release.
 
 [Apache 2.0]:          	http://www.apache.org/licenses/LICENSE-2.0.html
