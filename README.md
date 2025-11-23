@@ -22,7 +22,7 @@ The project is built with [Maven] and is available on the central Maven reposito
 
 Add the property
 ```xml
-<mockito-graphql-matchers.version>1.0.0</mockito-graphql-matchers.version>
+<mockito-graphql-matchers.version>1.1.0</mockito-graphql-matchers.version>
 ```
 
 then add
@@ -45,7 +45,7 @@ For
 
 ```groovy
 ext {
-  mockitoGraphqlMatchersVersion = '1.0.0'
+  mockitoGraphqlMatchersVersion = '1.1.0'
 }
 ```
 
