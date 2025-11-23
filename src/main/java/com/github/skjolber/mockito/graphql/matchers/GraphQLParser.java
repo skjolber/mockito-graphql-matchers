@@ -69,7 +69,7 @@ public class GraphQLParser {
 	}
 	
 	public static String parseOperationName(byte[] content) {
-		try (JsonParser parser = JSON_FACTORY.createParser(ObjectReadContext.empty(), content)) {
+		try (JsonParser parser = JSON_FACTORY.createParser(ObjectReadContext.empty(), content, 0, content.length)) {
 			return parseOperationName(parser);
 		} catch(Exception e) {
 			return null;
