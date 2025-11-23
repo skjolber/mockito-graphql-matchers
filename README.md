@@ -77,6 +77,7 @@ so to emulate more complex mock GraphQL service behaviors.
 
 ## History
 
+  * 1.1.0: Upgrade Jackson to 3.x.
   * 1.0.5: Upgrade graphql-java to 25.x and JUnit to 6.x. 
   * 1.0.1-1.0.4: Adjust publishing.
   * 1.0.0: Initial release.
