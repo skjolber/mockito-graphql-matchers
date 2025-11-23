@@ -3,8 +3,10 @@ package com.github.skjolber.mockito.graphql.matchers;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonGenerator;
+import tools.jackson.core.JsonEncoding;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.core.ObjectWriteContext;
+import tools.jackson.core.json.JsonFactory;
 
 public class GraphQLWrapper {
 
@@ -13,12 +15,12 @@ public class GraphQLWrapper {
 	public static String wrap(String query, String operationName, String variables) throws IOException {
 		ByteArrayOutputStream bout = new ByteArrayOutputStream(query.length() + 512);
 		
-		try (JsonGenerator generator = JSON_FACTORY.createGenerator(bout)) {
+		try (JsonGenerator generator = JSON_FACTORY.createGenerator(ObjectWriteContext.empty(), bout, JsonEncoding.UTF8)) {
 			generator.writeStartObject();
-			generator.writeStringField("query", query);
-			generator.writeStringField("operationName", operationName);
+			generator.writeStringProperty("query", query);
+			generator.writeStringProperty("operationName", operationName);
 			if(variables != null) {
-				generator.writeFieldName("variables");
+				generator.writeName("variables");
 				generator.writeRawValue(variables);
 			}
 			generator.writeEndObject();

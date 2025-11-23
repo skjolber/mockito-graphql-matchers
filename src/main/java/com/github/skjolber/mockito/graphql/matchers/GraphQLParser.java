@@ -2,16 +2,17 @@ package com.github.skjolber.mockito.graphql.matchers;
 
 import java.io.IOException;
 
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
+import tools.jackson.core.JsonParser;
+import tools.jackson.core.JsonToken;
+import tools.jackson.core.ObjectReadContext;
+import tools.jackson.core.json.JsonFactory;
 
 public class GraphQLParser {
 
 	private static final JsonFactory JSON_FACTORY = new JsonFactory();
 	
 	public static String parseQuery(String content) {
-		try (JsonParser parser = JSON_FACTORY.createParser(content)) {
+		try (JsonParser parser = JSON_FACTORY.createParser(ObjectReadContext.empty(), content)) {
 			return parseQuery(parser);
 		} catch(Exception e) {
 			return null;
@@ -19,7 +20,7 @@ public class GraphQLParser {
 	}
 	
 	public static String parseQuery(byte[] content) {
-		try (JsonParser parser = JSON_FACTORY.createParser(content)) {
+		try (JsonParser parser = JSON_FACTORY.createParser(ObjectReadContext.empty(), content, 0, content.length)) {
 			return parseQuery(parser);
 		} catch(Exception e) {
 			return null;
@@ -42,11 +43,11 @@ public class GraphQLParser {
 				level--;
 			} else {
 				if(level == 1) {
-					if(nextToken == JsonToken.FIELD_NAME) {
+					if(nextToken == JsonToken.PROPERTY_NAME) {
 						String name = parser.currentName();
 						if(name.equals("query")) {
 							if(parser.nextToken() == JsonToken.VALUE_STRING) {
-								return parser.getText();
+								return parser.getString();
 							} else {
 								break;
 							}
@@ -60,7 +61,7 @@ public class GraphQLParser {
 	}
 	
 	public static String parseOperationName(String content) {
-		try (JsonParser parser = JSON_FACTORY.createParser(content)) {
+		try (JsonParser parser = JSON_FACTORY.createParser(ObjectReadContext.empty(), content)) {
 			return parseOperationName(parser);
 		} catch(Exception e) {
 			return null;
@@ -68,7 +69,7 @@ public class GraphQLParser {
 	}
 	
 	public static String parseOperationName(byte[] content) {
-		try (JsonParser parser = JSON_FACTORY.createParser(content)) {
+		try (JsonParser parser = JSON_FACTORY.createParser(ObjectReadContext.empty(), content)) {
 			return parseOperationName(parser);
 		} catch(Exception e) {
 			return null;
@@ -91,11 +92,11 @@ public class GraphQLParser {
 				level--;
 			} else {
 				if(level == 1) {
-					if(nextToken == JsonToken.FIELD_NAME) {
+					if(nextToken == JsonToken.PROPERTY_NAME) {
 						String name = parser.currentName();
 						if(name.equals("operationName")) {
 							if(parser.nextToken() == JsonToken.START_OBJECT) {
-								return parser.getText();
+								return parser.getString();
 							} else {
 								break;
 							}
@@ -110,7 +111,7 @@ public class GraphQLParser {
 	
 	public static JsonParser parseVariables(String content) {
 		try {
-			JsonParser parser = JSON_FACTORY.createParser(content);
+			JsonParser parser = JSON_FACTORY.createParser(ObjectReadContext.empty(), content);
 			
 			return parseVariables(parser);
 		} catch(Exception e) {
@@ -120,7 +121,7 @@ public class GraphQLParser {
 	
 	public static JsonParser parseVariables(byte[] content) {
 		try {
-			JsonParser parser = JSON_FACTORY.createParser(content);
+			JsonParser parser = JSON_FACTORY.createParser(ObjectReadContext.empty(), content, 0, content.length);
 			
 			return parseVariables(parser);
 		} catch(Exception e) {
@@ -144,7 +145,7 @@ public class GraphQLParser {
 				level--;
 			} else {
 				if(level == 1) {
-					if(nextToken == JsonToken.FIELD_NAME) {
+					if(nextToken == JsonToken.PROPERTY_NAME) {
 						String name = parser.currentName();
 						if(name.equals("variables")) {
 							if(parser.nextToken() == JsonToken.START_OBJECT) {
@@ -162,7 +163,7 @@ public class GraphQLParser {
 	}
 	
 	public static boolean isGrapQL(String content) {
-		try(JsonParser parser = JSON_FACTORY.createParser(content)) {
+		try(JsonParser parser = JSON_FACTORY.createParser(ObjectReadContext.empty(), content)) {
 			return isGrapQL(parser);
 		} catch(Exception e) {
 			return false;
@@ -170,7 +171,7 @@ public class GraphQLParser {
 	}
 	
 	public static boolean isGrapQL(byte[] content) {
-		try(JsonParser parser = JSON_FACTORY.createParser(content)){
+		try(JsonParser parser = JSON_FACTORY.createParser(ObjectReadContext.empty(), content, 0, content.length)){
 			return isGrapQL(parser);
 		} catch(Exception e) {
 			return false;
@@ -198,7 +199,7 @@ public class GraphQLParser {
 				level--;
 			} else {
 				if(level == 1) {
-					if(nextToken == JsonToken.FIELD_NAME) {
+					if(nextToken == JsonToken.PROPERTY_NAME) {
 						String name = parser.currentName();
 						switch(name) {
 							case "query": {
